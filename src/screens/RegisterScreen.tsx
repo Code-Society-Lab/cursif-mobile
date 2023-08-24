@@ -22,6 +22,6 @@ function Hello() {
   });
 }
 
-export default function LoginScreen() {
+export default function RegisterScreen() {
   return(<span>Register</span>);
 }
