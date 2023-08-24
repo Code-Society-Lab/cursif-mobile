@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableOpacity } from 'react-native';
-import styles from './styles/styles';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+import styles from '../styles/styles';
 
 // We might want to adapt this so that we can add the funcationality everywhere easily
 export default function HomeScreen() {
@@ -28,6 +28,7 @@ export default function HomeScreen() {
 
   return (
     <View style={containerStyle}>
+      <Image source={require('../../assets/code_society.svg')}></Image>
       <TouchableOpacity onPress={toggleBackground}>
         <Text style={textStyle}>Welcome to Cursif!</Text>
       </TouchableOpacity>

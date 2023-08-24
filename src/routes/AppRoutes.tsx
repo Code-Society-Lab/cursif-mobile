@@ -7,7 +7,7 @@ import {
   RouterProvider 
 } from 'react-router-dom';
 
-import { LoginScreen, RegisterScreen } from "../screens";
+import { LoginScreen, RegisterScreen, HomeScreen } from "../screens";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -20,8 +20,16 @@ const router = createBrowserRouter([
     )
   },
   {
+    path: "/home",
+    element: <HomeScreen />,
+  },
+  {
     path: "/login",
     element: <LoginScreen />,
+  },
+  {
+    path: "/register",
+    element: <RegisterScreen />,
   }
 ]);
 
