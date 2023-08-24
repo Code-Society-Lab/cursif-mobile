@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 import { AppLoading } from 'expo'
-import { ApolloClient, InMemoryCache, ApolloProvider, gql, createHttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql, useQuery, createHttpLink } from '@apollo/client';
 
 
 import { setContext } from '@apollo/client/link/context';
@@ -28,24 +28,35 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-export default function App() {
-  const data = client.query({
-    query: gql`
-      query TestQuery {
-        users {
-          id
-          username
-        }
-      }
-    `,
-  })
-  .then((result) => console.log(result));
+const GET_GREETING = gql`
+  query GetUser {
+    users {
+      id
+      username
+    }
+  }
+`;
 
+function Hello() {
+  const { loading, error, data } = useQuery(GET_GREETING, {
+    variables: {  },
+  });
+  
+  if (loading) return <p>Loading ...</p>;
+
+  console.log(data)
+  // for eeach data.users
+  return data.users.map((user) => {
+    return <p>Hello {user.username}!</p>
+  });
+}
+
+export default function App() {
   return(
     <ApolloProvider client={client}>
       <View style={styles.container}>
-        <Text><h1>Welcome to Cursif! {data}</h1></Text>
-        <StatusBar style="auto" />
+        <Text><h1>Welcome to Cursif!</h1></Text>
+        <Hello />
       </View>
     </ApolloProvider>
   )
